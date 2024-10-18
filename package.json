@@ -3,13 +3,16 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc && cp ./static/* ./build",
+		"lint:types": "tsc --noEmit"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "MIT",
 	"description": "",
 	"devDependencies": {
-		"@types/chrome": "^0.0.278"
+		"@types/chrome": "0.0.278",
+		"typescript": "5.6.3"
 	}
 }

@@ -4,7 +4,8 @@
 	"description": "Removes ads from YouTube videos",
 	"version": "1.0",
 	"background": {
-		"service_worker": "./background/service-worker.js"
+		"service_worker": "./background/service-worker.js",
+		"type": "module"
 	},
 	"permissions": ["debugger", "tabs"],
 	"action": {}
