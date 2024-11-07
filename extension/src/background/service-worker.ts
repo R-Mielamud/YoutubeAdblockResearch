@@ -5,11 +5,9 @@ interface ICDPSession {
 
 	detach(): Promise<void>;
 
-	addListener<TMethod extends CDP.AnyMethod>(
-		method: TMethod,
-		listener: (
-			params: CDP.MethodParams<TMethod>
-		) => Promise<CDP.MethodReturn<TMethod>>
+	addListener<TEvent extends CDP.AnyEvent>(
+		method: TEvent,
+		listener: (params: CDP.Params<TEvent>) => Promise<void>
 	): () => void;
 
 	removeAllListeners(): void;
@@ -19,7 +17,7 @@ interface ICDPSession {
 	): Promise<CDP.MethodReturn<TMethod>>;
 	sendCommand<TMethod extends CDP.AnyMethod>(
 		method: TMethod,
-		params: CDP.MethodParams<TMethod>
+		params: CDP.Params<TMethod>
 	): Promise<CDP.MethodReturn<TMethod>>;
 }
 
@@ -81,11 +79,9 @@ class ChromeExtensionCDPSession implements ICDPSession {
 		}
 	}
 
-	public addListener<TMethod extends CDP.AnyMethod>(
-		method: TMethod,
-		listener: (
-			params: CDP.MethodParams<TMethod>
-		) => Promise<CDP.MethodReturn<TMethod>>
+	public addListener<TEvent extends CDP.AnyEvent>(
+		method: TEvent,
+		listener: (params: CDP.Params<TEvent>) => Promise<void>
 	): () => void {
 		const innerListener = (
 			source: chrome.debugger.Debuggee,
@@ -96,7 +92,7 @@ class ChromeExtensionCDPSession implements ICDPSession {
 				return;
 			}
 
-			return listener(params as CDP.MethodParams<TMethod>);
+			return listener(params as CDP.Params<TEvent>);
 		};
 
 		chrome.debugger.onEvent.addListener(innerListener);
@@ -118,11 +114,11 @@ class ChromeExtensionCDPSession implements ICDPSession {
 	): Promise<CDP.MethodReturn<TMethod>>;
 	public async sendCommand<TMethod extends CDP.AnyMethod>(
 		method: TMethod,
-		params: CDP.MethodParams<TMethod>
+		params: CDP.Params<TMethod>
 	): Promise<CDP.MethodReturn<TMethod>>;
 	public async sendCommand<TMethod extends CDP.AnyMethod>(
 		method: TMethod,
-		params?: CDP.MethodParams<TMethod>
+		params?: CDP.Params<TMethod>
 	): Promise<CDP.MethodReturn<TMethod>> {
 		return (await chrome.debugger.sendCommand(
 			this.#target,

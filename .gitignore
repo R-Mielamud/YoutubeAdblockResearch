@@ -1,5 +1,10 @@
 node_modules
+venv
+__pycache__
 .DS_Store
 build
 dist
 .gitignore-*
+*.local
+*.local.*
+*.log

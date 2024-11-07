@@ -91,6 +91,12 @@ declare namespace CDP {
 			export type Return = void;
 		}
 
+		export namespace Disable {
+			export const method = "Debugger.disable" as const;
+			export type Params = void;
+			export type Return = void;
+		}
+
 		export namespace Paused {
 			export const method = "Debugger.paused" as const;
 
@@ -166,6 +172,7 @@ declare namespace CDP {
 	}
 
 	export type AnyMethod =
+		| typeof Debugger.Disable.method
 		| typeof Debugger.Enable.method
 		| typeof Debugger.SetBreakpoint.method
 		| typeof Debugger.SetBreakpointByURL.method
@@ -173,13 +180,16 @@ declare namespace CDP {
 		| typeof DOMDebugger.SetXHRBreakpoint.method;
 
 	export type ParameterlessMethod =
+		| typeof Debugger.Disable.method
 		| typeof Debugger.Enable.method
 		| typeof Debugger.StepInto.method;
 
 	export type AnyEvent = typeof Debugger.Paused.method;
 
 	export type Params<TMethod extends AnyMethod | AnyEvent> =
-		TMethod extends typeof Debugger.Enable.method
+		TMethod extends typeof Debugger.Disable.method
+			? Debugger.Disable.Params
+			: TMethod extends typeof Debugger.Enable.method
 			? Debugger.Enable.Params
 			: TMethod extends typeof Debugger.Paused.method
 			? Debugger.Paused.Params
@@ -194,7 +204,9 @@ declare namespace CDP {
 			: never;
 
 	export type MethodReturn<TMethod extends AnyMethod> =
-		TMethod extends typeof Debugger.Enable.method
+		TMethod extends typeof Debugger.Disable.method
+			? Debugger.Disable.Return
+			: TMethod extends typeof Debugger.Enable.method
 			? Debugger.Enable.Return
 			: TMethod extends typeof Debugger.Paused.method
 			? Debugger.SetBreakpoint.Return
