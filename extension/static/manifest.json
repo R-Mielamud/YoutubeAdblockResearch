@@ -3,10 +3,17 @@
 	"name": "YouTube Adblock v2",
 	"description": "Removes ads from YouTube videos",
 	"version": "1.0",
-	"background": {
-		"service_worker": "./background/service-worker.js",
-		"type": "module"
-	},
+	// "background": {
+	// 	"service_worker": "./background/service-worker.js",
+	// 	"type": "module"
+	// },
+	"content_scripts": [
+		{
+			"matches": ["*://youtube.com/*", "*://*.youtube.com/*"],
+			"js": ["./content-scripts/js/slots-placements-block.js"],
+			"run_at": "document_start"
+		}
+	],
 	"permissions": ["debugger", "tabs"],
 	"action": {}
 }
