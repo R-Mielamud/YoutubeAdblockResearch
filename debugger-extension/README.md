@@ -1,4 +1,4 @@
-# Tracing extension
+# Debugger extension
 
 **Prerequisites:**
 
