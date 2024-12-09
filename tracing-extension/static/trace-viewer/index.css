@@ -1,0 +1,157 @@
+:root {
+	--color-white: #fafafa;
+	--color-black: #212121;
+	--color-primary: #ffc700;
+	--color-primary-dark: #857438;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+*::selection {
+	color: var(--color-black);
+	background-color: var(--color-primary);
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+html,
+input,
+textarea {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+		sans-serif;
+}
+
+body {
+	font-size: 14px;
+	line-height: 1.3;
+	color: var(--color-black);
+	background-color: var(--color-white);
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+main {
+	padding: 20px 35px;
+	flex-grow: 1;
+	overflow-y: auto;
+
+	.if-active,
+	.if-inactive {
+		display: none;
+	}
+
+	&.active .if-active {
+		display: unset;
+	}
+
+	&:not(.active) .if-inactive {
+		display: unset;
+	}
+}
+
+p {
+	margin: 10px 0;
+}
+
+button {
+	background-color: var(--color-primary);
+	margin: 0;
+	outline: none;
+	border: none;
+	width: max-content;
+	padding: 7px 25px;
+	border-radius: 5px;
+	transition-duration: 100ms;
+	transition-property: filter;
+	cursor: pointer;
+
+	&:hover {
+		filter: brightness(85%);
+	}
+}
+
+#timeline {
+	--marker-size: 2px;
+	position: relative;
+	width: 100%;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	cursor: crosshair;
+
+	&::before {
+		content: "";
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: var(--color-primary-dark);
+	}
+
+	&:hover {
+		.marker.ghost {
+			opacity: 0.8;
+		}
+
+		.screenshot[src] {
+			display: block;
+		}
+	}
+
+	.marker {
+		--left: 0;
+		position: absolute;
+		top: 0;
+		left: clamp(0%, var(--left), 100%);
+		height: 100%;
+		border-color: var(--color-primary);
+		border-style: solid;
+		border-width: 0 var(--marker-size);
+		transform: translateX(calc(var(--marker-size) * (-1)));
+
+		&.ghost {
+			opacity: 0;
+			anchor-name: --ghost-marker;
+		}
+	}
+
+	.segment-background {
+		--left: 0;
+		--width: 0;
+		position: absolute;
+		top: 0;
+		left: clamp(0%, var(--left), 100%);
+		width: clamp(0%, var(--width), calc(100% - var(--left)));
+		height: 100%;
+		padding: 0 var(--marker-size);
+
+		&::before {
+			content: "";
+			display: block;
+			background-color: var(--color-primary);
+			opacity: 0.3;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.screenshot {
+		display: none;
+		position: absolute;
+		position-anchor: --ghost-marker;
+		top: calc(anchor(bottom) + 10px);
+		justify-self: anchor-center;
+		width: 400px;
+		pointer-events: none;
+		user-select: none;
+	}
+}

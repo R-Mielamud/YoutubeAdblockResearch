@@ -1,0 +1,28 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Trace Viewer</title>
+		<link rel="stylesheet" href="../reset.css" />
+		<link rel="stylesheet" href="./index.css" />
+	</head>
+	<body>
+		<main>
+			<div class="if-active">
+				<div id="timeline">
+					<div class="ghost marker" id="ghost-marker"></div>
+					<img class="screenshot" id="screenshot" />
+				</div>
+				<p>
+					Total function calls:
+					<span id="function-calls-count"></span>
+				</p>
+				<button id="submit-button">Submit</button>
+			</div>
+			<div class="if-inactive">Waiting for a trace...</div>
+		</main>
+		<footer>
+			<script src="./index.js"></script>
+		</footer>
+	</body>
+</html>

@@ -1,0 +1,11 @@
+{
+	"manifest_version": 3,
+	"name": "YouTube Adblock Tracing",
+	"description": "",
+	"version": "1.0",
+	"background": {
+		"service_worker": "./service-worker/index.js"
+	},
+	"action": {},
+	"permissions": ["debugger", "tabs"]
+}
