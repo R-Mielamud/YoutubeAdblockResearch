@@ -17,12 +17,12 @@
 -   Enable `Developer Mode`
 -   Build the extension
 -   Click `Load unpacked extension` and select the `./build` folder
--   To apply changes after a rebuild, go to `chrome://extensions` and click the reload button on the extension card.
+-   To apply changes after a rebuild, go to `chrome://extensions` and click the reload button on the extension card
 
 **Usage:**
 
 -   Go to any page
--   Click on the puzzle icon right of the search bar
+-   Click the puzzle icon on the right of the browser search bar
 -   Click YouTube Adblock Tracing
 -   Wait a couple of seconds
 -   Perform the action you want to record (preferably in under 11 s)

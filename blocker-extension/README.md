@@ -17,7 +17,7 @@
 -   Enable `Developer Mode`
 -   Build the extension
 -   Click `Load unpacked extension` and select the `./build` folder
--   To apply changes after a rebuild, go to `chrome://extensions` and click the reload button on the extension card.
+-   To apply changes after a rebuild, go to `chrome://extensions` and click the reload button on the extension card
 
 **Usage:**
 

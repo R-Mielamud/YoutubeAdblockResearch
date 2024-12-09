@@ -8,6 +8,8 @@ import { TargetWorker } from "@/target-worker";
 const VIDEO_ID = "pJwpSVAfej0";
 const PLAYER_BASE_SCRIPT_REGEX = "player_ias\\.vflset\\/.*?\\/base\\.js";
 
+// Line and column are zero-based
+
 const START_BREAKPOINTS: CDP.Debugger.SetBreakpointByURL.Params[] = [
 	{
 		urlRegex: PLAYER_BASE_SCRIPT_REGEX,
